@@ -713,12 +713,9 @@
             </ul>   
         </xsl:if>
         <xsl:apply-templates select="t:sex | t:death | t:birth | t:floruit"/>
-        <!-- Work in progress
         <xsl:if test="t:state">
             <xsl:for-each-group select="//t:state[not(@when) and not(@notBefore) and not(@notAfter) and not(@to) and not(@from)]" group-by="@type">
-                <h4>
-                    <xsl:value-of select="concat(upper-case(substring(current-grouping-key(),1,1)),substring(current-grouping-key(),2))"/>
-                </h4>
+                <h3><xsl:value-of select="concat(upper-case(substring(current-grouping-key(),1,1)),substring(current-grouping-key(),2))"/></h3>
                 <ul>
                     <xsl:for-each select="current-group()[not(t:desc/@xml:lang = 'en-x-gedsh')]">
                         <li>
@@ -729,6 +726,11 @@
                 </ul>
             </xsl:for-each-group>
         </xsl:if>
+        <!-- Usaybia data vis -->
+        <!--
+        <div style="min-height:20px; border:blue 1px solid;">
+            <div class="dynamicContent" data-url="{concat($nav-base,'/modules/content-negotiation/content-negotiation.xql?getVis=true&amp;display=graph&amp;id=',$resource-id,'&amp;mode=force&amp;locus=single')}"/>
+        </div>
         -->
         <xsl:if test="not(empty(t:desc[not(starts-with(@xml:id,'abstract'))][1])) or not(empty(t:note[@type='description'][1]))">
             <h3>Descriptions</h3>
@@ -774,9 +776,9 @@
             </div>
         </xsl:if>
         
-        <xsl:if test="not(empty(t:note[not(@type='description')][1]))">
+        <xsl:if test="not(empty(t:note[not(@type='description') and not(@type='abstract')][1]))">
             <h3>Notes</h3>
-            <xsl:apply-templates select="t:note[not(@type='description')]"/>
+            <xsl:apply-templates select="t:note[not(@type='description') and not(@type='abstract')]"/>
         </xsl:if>
         
         <div class="info-btns">  
