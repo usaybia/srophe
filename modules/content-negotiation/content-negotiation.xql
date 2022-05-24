@@ -10,6 +10,7 @@ import module namespace config="http://srophe.org/srophe/config" at "../config.x
 
 (: Content serialization modules. :)
 import module namespace cntneg="http://srophe.org/srophe/cntneg" at "content-negotiation.xqm";
+import module namespace d3xquery="http://srophe.org/srophe/d3xquery" at "../../d3xquery/d3xquery.xqm";
 import module namespace tei2html="http://srophe.org/srophe/tei2html" at "tei2html.xqm";
 
 (: Data processing module. :)
@@ -93,13 +94,46 @@ declare function local:coordinates($type as xs:string?, $collection as xs:string
      return util:eval($path)
 };
 
+let $mode := 
+    if(request:get-parameter('mode', '') != '') then request:get-parameter('mode', '') 
+    else 'Force'
 let $path := if(request:get-parameter('id', '')  != '') then 
                 request:get-parameter('id', '')
              else if(request:get-parameter('doc', '') != '') then
                 request:get-parameter('doc', '')
-             else ()   
+             else ()
+let $id := if(request:get-parameter('recordID', '')) then request:get-parameter('recordID', '')
+           else request:get-parameter('id', '')
+let $ids :=  request:get-parameter("ids", ())           
+let $relationship := 
+            if(request:get-parameter('relationship', '') != '') then request:get-parameter('relationship', '') 
+            else ()   
+let $jsonFile := if(request:get-parameter('jsonFile', '') != '') then request:get-parameter('jsonFile', '') 
+                 else ()
+let $locus := if(request:get-parameter('locus', '') != '') then request:get-parameter('locus', '') 
+                 else ()
+let $height := if(request:get-parameter('height', '') != '') then request:get-parameter('height', '') 
+                 else ()  
+let $width := if(request:get-parameter('width', '') != '') then request:get-parameter('width', '') 
+                 else ()       
+let $collection :=  request:get-parameter("collection", ())                 
+let $collection-path := 
+            if(config:collection-vars($collection)/@data-root != '') then concat('/',config:collection-vars($collection)/@data-root)
+            else if($collection != '') then concat('/',$collection)
+            else ()                 
 let $data :=
-    if(request:get-parameter('id', '') != '' or request:get-parameter('doc', '') != '') then
+    if(request:get-parameter('getVisData', '')) then 
+                let $id := if(request:get-parameter('recordID', '')) then request:get-parameter('recordID', '')
+                           else request:get-parameter('id', '')
+                let $relationship := 
+                           if(request:get-parameter('relationship', '') != '') then request:get-parameter('relationship', '') 
+                           else ()         
+               let $mode := 
+                            if(request:get-parameter('mode', '') != '') then 
+                                request:get-parameter('mode', '') 
+                            else 'Force'
+               return  d3xquery:build-graph-type((), $id, $relationship, $mode, if($id != '') then 'single' else ())
+    else if(request:get-parameter('id', '') != '' or request:get-parameter('doc', '') != '') then
         data:get-document()
     else if(request:get-parameter-names() != '') then 
         if(request:get-parameter('api', '') != '') then
@@ -146,8 +180,22 @@ let $data :=
                     </root>
        else ()
 let $format := if(request:get-parameter('format', '') != '') then request:get-parameter('format', '') else 'xml'    
-return  
-    if(not(empty($data))) then
+return 
+    if(request:get-parameter('getVis', '')) then 
+            (response:set-header("Content-Type", "text/html; charset=utf-8"),
+                    <div class="d3jsVis" xmlns="http://www.w3.org/1999/xhtml">
+                        <h4>Test vis</h4>
+                        {
+                            d3xquery:data-visualization($data, $jsonFile, $mode, $locus, $relationship, $height, $width) 
+                        }
+                    </div>)
+    else if(request:get-parameter('getVisData', '')) then 
+        (response:set-header("Content-Type", "application/json"),
+            serialize($data, 
+                <output:serialization-parameters>
+                    <output:method>json</output:method>
+                </output:serialization-parameters>))    
+    else if(not(empty($data))) then
         if(request:get-parameter('api', '') != '') then
             if(request:get-parameter('geo', '')) then
                 if($format = 'kml') then 

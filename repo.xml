@@ -7,8 +7,9 @@
     <license>GNU-LGPL</license>
     <copyright>true</copyright>
     <type>application</type>
-    <target>srophe</target>
+    <target>usaybia</target>
     <prepare>pre-install.xql</prepare>
     <finish>post-install.xql</finish>
     
-<deployed>2021-10-29T11:31:14.218-04:00</deployed></meta>
+
+<deployed>2022-05-03T11:40:09.84-04:00</deployed></meta>

@@ -12,6 +12,7 @@ import module namespace templates="http://exist-db.org/xquery/templates" ;
 (: Import Srophe application modules. :)
 import module namespace config="http://srophe.org/srophe/config" at "config.xqm";
 import module namespace data="http://srophe.org/srophe/data" at "lib/data.xqm";
+import module namespace d3xquery="http://srophe.org/srophe/d3xquery" at "../d3xquery/d3xquery.xqm";
 import module namespace facet="http://expath.org/ns/facet" at "lib/facet.xqm";
 import module namespace sf="http://srophe.org/srophe/facets" at "lib/facets.xql";
 import module namespace global="http://srophe.org/srophe/global" at "lib/global.xqm";
@@ -578,4 +579,31 @@ declare %templates:wrap function app:build-editor-list($node as node(), $model a
             <li>{normalize-space($name)}</li>
             else ''
         else ''  
+};
+
+(: Network visualizations:)
+(:~ 
+ : d3js visualization with $model($hits)
+ : Use d3xquery/d3xquery.xqm to generate appropriately formatted JSON data. 
+:)
+declare function app:data-visualization($node as node(), $model as map(*), $json-file as xs:string?, $mode as xs:string?, $locus as xs:string?, $relationship as xs:string?, $height as xs:string?, $width as xs:string?) {
+ d3xquery:data-visualization($model("hits"), $json-file, $mode, $locus, $relationship, $height, $width)
+};
+
+(: Usaybia function for paging through texts, texts are broken up in the db, need a way to list all the parts, and see an overview? :)
+declare function app:textTOC($node as node(), $model as map(*)){    
+    <div>    
+        <ul class="pagination">
+            {if($model("hits")/descendant::tei:div[@type='textpart'][@subtype='chapter'][@prev != '']) then
+                <li><a href="{replace(string($model("hits")/descendant::tei:div[@type='textpart'][@subtype='chapter']/@prev),$config:base-uri,$config:nav-base)}">&lt;</a></li>
+             else ()}
+            <li><a href="#" class="selected">{
+            concat(string($model("hits")/descendant::tei:div[@type='textpart'][@subtype='chapter']/@n),'.',
+                    string($model("hits")/descendant::tei:div[@type='textpart'][@subtype='biography']/@n))}</a></li>
+            {if($model("hits")/descendant::tei:div[@type='textpart'][@subtype='chapter'][@next != '']) then
+                <li><a href="{replace(string($model("hits")/descendant::tei:div[@type='textpart'][@subtype='chapter']/@next),$config:base-uri,$config:nav-base)}">&gt;</a></li>
+            else ()}
+        </ul>
+        <h4>Place holder</h4>
+    </div>
 };

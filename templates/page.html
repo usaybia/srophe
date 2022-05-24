@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<html xmlns="http://www.w3.org/1999/xhtml" data-template="app:get-work" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" data-template="app:get-work">
     <head>
         <title data-template="app:record-title">App Title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <meta data-template="config:app-meta"/>
-        <link rel="shortcut icon" href="$nav-base/favicon.ico"/>
+        <link data-template="app:metadata"/>
+        <link rel="shortcut icon" href="$nav-base/resources/images/fav-icons/syriaca-favicon.ico"/>
         <!-- Bootstrap 3 -->
         <link rel="stylesheet" type="text/css" href="$nav-base/resources/bootstrap/css/bootstrap.min.css"/>
         <link rel="stylesheet" type="text/css" href="$nav-base/resources/css/sm-core-css.css"/>
         <!-- Srophe styles -->
         <link rel="stylesheet" type="text/css" href="$nav-base/resources/css/syr-icon-fonts.css"/>
         <link rel="stylesheet" type="text/css" href="$nav-base/resources/css/style.css"/>
+        <link rel="stylesheet" type="text/css" href="$nav-base/resources/css/usaybia.css"/>
+<!--        <link rel="stylesheet" type="text/css" href="$nav-base/resources/css/slider.css"/>-->
+        <!-- Used for homepage -->
         <link rel="stylesheet" type="text/css" media="print" href="$nav-base/resources/css/print.css"/>
         <!-- Leaflet -->
         <link rel="stylesheet" href="$nav-base/resources/leaflet/leaflet.css"/>
@@ -68,17 +71,18 @@
                     }
                 });
                 //Change fonts
+                /*
                 $('.swap-font').on('click', function(){
                     var selectedFont = $(this).data("font-id")
                     $('.selectableFont').not('.syr').css('font-family', selectedFont);
                     $("*:lang(syr)").css('font-family', selectedFont)
                 });
-
+                */
             })
         </script>
     </head>
     <body id="body">
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" data-template="app:fix-links">
+        <nav class="navbar bg-dark navbar-inverse navbar-fixed-top" role="navigation" data-template="app:fix-links">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
@@ -88,104 +92,60 @@
                 </button>
                 <a class="navbar-brand banner-container" href="$nav-base/index.html"> 
                     <span class="syriaca-icon syriaca-syriaca banner-icon" data-template="app:logo"/>
-                    <span class="banner-text" data-template="config:app-title">App Title</span>
+                    <span data-template="config:app-title">App Title</span>
                 </a>
             </div>
             <div class="navbar-collapse collapse pull-right" id="navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="$nav-base/index.html" class="nav-text">Home</a>
-                    </li>
-                    <li>
-                        <a href="$nav-base/browse.html" class="nav-text">Browse</a>
-                    </li>
-                    <li>
-                        <a href="$nav-base/documentation/index.html" class="nav-text">Documentation </a>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle lonely-caret" data-toggle="dropdown"> 
-                            <span class="mobile-submenu">Publications</span>  <b class="caret"/>
+                        <a href="$nav-base/persons/browse.html" class="nav-text btn">Persons
+                            <sup>beta</sup>
                         </a>
-                        <ul class="dropdown-menu pull-right">
-                            <li>
-                                <a href="$nav-base/index.html">
-                                    <span class="icon-text">Home</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="$nav-base/persons/index.html">
-                                    <span class="icon-text">Persons</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="$nav-base/geo/index.html">
-                                    <span class="icon-text">Gazetteer</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="$nav-base/bibl/index.html">
-                                    <span class="icon-text">Works Cited</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="$nav-base/d3xquery/index.html">
-                                    <span class="icon-text">Relationship Visualization</span>
-                                </a>
-                            </li>
-                        </ul>
                     </li>
                     <li>
-                        <a href="$nav-base/search.html" class="nav-text">Advanced Search</a>
+                        <a href="$nav-base/places/browse.html" class="nav-text btn">Places
+                            <sup>beta</sup>
+                        </a>
                     </li>
                     <li>
-                        <div id="search-wrapper">
-                            <form class="navbar-form navbar-right search-box" role="search" action="$nav-base/search.html" method="get">
-                                <div class="form-group">
-                                    <input type="text" class="form-control keyboard" placeholder="search" name="keyword" id="keywordNav"/>
-                                    <span data-template="app:keyboard-select-menu" data-template-input-id="keywordNav"/>
-                                    <button class="btn btn-default search-btn" id="searchbtn" type="submit" title="Search">
-                                        <span class="glyphicon glyphicon-search"/>
-                                    </button>                                    
-                                </div>
-                            </form>
-                        </div>
+                        <a href="#" class="nav-text btn disabled" aria-disabled="true" tabindex="-1">
+                            <sup>coming soon </sup>
+                            Text, Works, Networks, Bibliography
+                        </a>
                     </li>
                     <li>
-                        <div class="btn-nav">
-                            <button class="btn btn-default navbar-btn" id="font" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Select Font">
-                                <span class="glyphicon glyphicon-font"/>
-                            </button>  
-                            <ul class="dropdown-menu dropdown-menu-right" id="swap-font">
-                                <li>
-                                    <a href="#" class="swap-font" id="DefaultSelect" data-font-id="EstrangeloEdessa">Default</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="swap-font" id="EstrangeloEdessaSelect" data-font-id="EstrangeloEdessa">Estrangelo Edessa</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="swap-font" id="EastSyriacAdiabeneSelect" data-font-id="EastSyriacAdiabene">East Syriac Adiabene</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="swap-font" id="SertoBatnanSelect" data-font-id="SertoBatnan">Serto Batnan</a>
-                                </li>
-                                <li>
-                                    <a href="$app-root/documentation/wiki.html?wiki-page=/How-to-view-Syriac-script&amp;wiki-uri=https://github.com/srophe/srophe-app-data/wiki">Help <span class="glyphicon glyphicon-question-sign"/>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                        <a href="$nav-base/forum2020/index.html" class="nav-text btn">Virtual Forum</a>
+                    </li> 
+                    <li>
+                        <a href="$nav-base/index.html" class="nav-text btn">About</a>
+                    </li> 
+                    <li>
+                        <a class="nav-text btn" href="$nav-base/de/index.html">Über das Projekt [DE]</a>
                     </li>
                 </ul>
             </div>
         </nav>
-        <div id="content" class="text"/>
-        <footer>
-            <a class="poweredby" href="http://srophe.org">
-                <img src="$nav-base/resources/images/srophe.svg" alt="Srophe"/>
-            </a>
-        </footer>
+        <div class="search-bar" data-template="app:fix-links">
+            <form class="inline-form" role="search" action="$nav-base/search.html" method="get">
+                <div class="input-group">
+                    <input type="text" class="form-control keyboard" placeholder="search" name="keyword" id="keywordNav"/>
+                    <div class="input-group-btn">
+                        <button class="btn btn-default search-btn" type="submit" data-toggle="tooltip" title="Search">
+                            <span class="glyphicon glyphicon-search"/>
+                        </button>
+                        <span data-template="app:keyboard-select-menu" data-template-input-id="keywordNav"/>
+                        <a class="btn btn-link" href="$nav-base/search.html">Advanced Search</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div id="content" class="text mainContentArea"/>
+        <!-- Footer -->
+        <footer data-template="app:shared-content" data-template-path="/templates/footer.html"/>
     </body>
     <!-- Additional Javascript -->
     <script type="text/javascript" src="$nav-base/resources/js/jquery.validate.min.js"/>
+    <script type="text/javascript" src="$nav-base/resources/js/require.min.js"/>
     <script type="text/javascript" src="$nav-base/resources/js/srophe.js"/>
+    <script data-template="app:google-analytics"/>
 </html>
