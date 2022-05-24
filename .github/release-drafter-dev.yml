@@ -1,4 +1,4 @@
-name-template: 'Usaybia.net web application pre-release version 0.9.0-devN'
+name-template: 'Usaybia.net web application pre-release version 0.9.0-dev'
 tag-template: 'v0.9.0-dev'
 version-template: '0.9.0-dev' # Different config files are referenced by workflows in different branches to allow 'dev' to be prepended only to development releases. See input: config-name in workflow file.
 categories:
