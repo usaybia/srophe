@@ -45,7 +45,7 @@ template: |
 
   It is intended to be used with data from the [usaybia-data repository](https://github.com/usaybia/usaybia-data).
 
-  The .xar package should be installed in [eXist-db 5.x](http://exist-db.org/exist/apps/homepage/index.html). 
+  The .xar package should be installed in [eXist-db 6.x](http://exist-db.org/exist/apps/homepage/index.html). 
 
   You can also make your own .xar of the application by downloading this repo and running ant in the repo directory. A docker image of eXist-db with this package pre-installed is available at https://github.com/orgs/usaybia/packages/container/package/usaybia-srophe.
   
