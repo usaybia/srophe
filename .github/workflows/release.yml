@@ -127,5 +127,6 @@ jobs:
         pull: true
         push: true
         tags: |
+          ghcr.io/usaybia/usaybia-srophe:deploy
           ghcr.io/usaybia/usaybia-srophe:latest
           ghcr.io/usaybia/usaybia-srophe:${{needs.update_release_draft.outputs.release_tag}}
