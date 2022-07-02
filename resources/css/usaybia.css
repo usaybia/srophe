@@ -1,0 +1,342 @@
+/* Application styles could go here */
+/**
+ * Colors: 
+ * Green: #87B59C
+ */
+
+@font-face {
+    font-family:Arsenal-Regular;
+    src: url('../fonts/arsenal-regular.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {font-family: Arsenal-Regular; background-color:white;}
+#content {margin-top: 54px; border-bottom:2px solid #87B59C;}
+.interior-content {padding-right:2em; padding-left:2em; padding-top: 50px;}
+
+h5 {font-size: 1.25em;}
+
+footer {border:none; }
+
+.bg-light {
+  background-color: rgb(248,249,250, .85);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+}
+
+.bg-dark {
+  background-color: rgba(0, 0, 0, .85);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px); 
+  color:white;
+}
+
+.bg-green {
+  background-color: rgb(135,181,156, .85);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  color:white;
+}
+
+.row-flex {
+    display: flex;
+}
+
+.col-flex {
+  flex: 1; /* additionally, equal width */
+  height: auto;
+}
+
+
+/*
+ * Custom translucent site header
+ */
+.navbar {
+  background-color: none;
+  font-variant:small-caps;
+}
+
+.navbar a {
+  color: #999;
+  transition: ease-in-out color .15s;
+}
+.navbar a:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+.navbar-brand {margin:0; padding:.5em 0; font-size: 1.15em; font-variant:small-caps;}
+
+.navbar {padding:0 2em; border:none !important;}
+
+.btn-navbar{
+    color: #fff !important;
+    background-color: #777777;
+    border-color: #6c757d; 
+ }
+
+.navbar input {
+  background-color: rgba(153,153,153, .10);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  border: 1px solid #777;
+    
+}
+
+.search-bar {
+    background-color: rgb(248,249,250, .98);
+    position:fixed;
+    right: 50;
+    left: 50;
+    width: 100%;
+    height:50px;
+    border:none;
+    text-align:center;
+    z-index: 250;
+/*    border-bottom:1px solid #87B59C;*/
+}
+
+.search-bar form{
+    padding-top:.5em;
+    display: inline-block;
+    width: 60%;
+    }
+.search-bar a {color:#444;}
+.search-bar a:hover {color:#87B59C;}
+.search-bar .input-group {width: 100%;}
+.search-bar .input-group input {background-color:white;}
+.search-bar .input-group-btn {width: 1% !important;}
+.search-bar .input-group .form-control{
+	border-right:0; 
+	box-shadow:0 0 0; 
+	border-color:#ccc;
+}
+.search-bar .input-group .search-btn{
+    border-left:0;
+    border-color:#ccc;
+    background:transparent;
+    background-color:white;
+    border-bottom-right-radius: 4px !important;
+    border-top-right-radius: 4px !important;
+
+}
+
+
+/* Custom buttons */
+
+.btn-dark {
+  background-color: rgba(153,153,153, .10);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  border: 1px solid #777;  
+  color:#9d9d9d;
+}
+
+button.btn-dark:active{
+      transform: translateY(1px);
+      filter: saturate(150%);
+    }
+
+button.btn-dark:hover {
+      color: #ddd;
+      background-color: rgba(143,143,143, .10);
+    }
+    
+button.btn-dark::-moz-focus-inner {
+      border: none;
+    }
+
+button.btn-dark:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(87, 145, 170, 0.5),
+        0 0 0 1.5px rgba(87, 145, 170, 0.5);
+    }
+
+.btn-info {
+  background-color: rgba(135,181,156, .85);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  border: 1px solid #87B59C;  
+  color:white;
+}
+    
+/* Homage page styles */
+.home-splash {
+    padding-top: 8em;
+    width: 100%;
+    min-height: 400px; 
+    background-image:url('../images/network.svg'); 
+    background-position:center center; 
+    /*background-size:cover;*/
+    }
+
+.home .col-flex { margin:.5em; padding:2em;}
+.overall {background:url('../images/overall.svg') center no-repeat;min-height:75px;}
+.allgemein {background:url('../images/allgemein.svg') center no-repeat;min-height:75px;}
+.vs {background:url('../images/vs.svg') center no-repeat; min-height:75px;}
+
+/*
+ * Dummy devices (replace them with your own or something else entirely!)
+ */
+
+.product-device {
+  position: absolute;
+  right: 10%;
+  bottom: -30%;
+  width: 300px;
+  height: 540px;
+  background-color: #333;
+  border-radius: 21px;
+  -webkit-transform: rotate(30deg);
+  transform: rotate(30deg);
+}
+
+.product-device::before {
+  position: absolute;
+  top: 10%;
+  right: 10px;
+  bottom: 10%;
+  left: 10px;
+  content: "";
+  background-color: rgba(255, 255, 255, .1);
+  border-radius: 5px;
+}
+
+.product-device-2 {
+  top: -25%;
+  right: auto;
+  bottom: 0;
+  left: 5%;
+  background-color: #e5e5e5;
+}
+
+
+/*
+ * Extra utilities
+ */
+
+.border-top { border-top: 1px solid #e5e5e5; }
+.border-bottom { border-bottom: 1px solid #e5e5e5; }
+
+.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+
+.flex-equal > * {
+  -ms-flex: 1;
+  flex: 1;
+}
+@media (min-width: 768px) {
+  .flex-md-equal > * {
+    -ms-flex: 1;
+    flex: 1;
+  }
+}
+
+.overflow-hidden { overflow: hidden; }
+
+p a, li a {
+    color:rgb(48,177,0)
+}
+
+h1, h2 {
+    font-family:Arsenal-Regular;
+}
+
+.btn-outline-secondary-selected {
+  color: #fff !important;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+/* Styles for forum program */
+.forum-program {
+  padding: 0px;
+}
+.forum-program h2 {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 5px;
+}
+.forum-column {
+ padding: 0px;
+}
+
+.forum-column > div:first-child {
+  padding-left: 5px;
+}
+
+.forum-item {
+  background-color: white;
+  background-position: 50%; 
+  background-size: cover;
+  height: 25em;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.col-sm-3 .forum-item-title {
+  width: 12em; 
+  padding-top: 10px;
+}
+.col-sm-9 .forum-item-title, .col-sm-6 .forum-item-title {
+  width: 20em; 
+  padding-top: 10px;
+}
+.forum-item-title > h3:first-child {
+  margin-top: 7px !important;
+}
+.forum-item-title-line-light {
+  color: white; 
+  margin: 7px 0;
+  width: 100%;
+  text-align: justify;
+  text-transform:uppercase;
+}
+.forum-item-title-line-light-hl {  
+  color: white;
+  background-color: dimgray; 
+  margin: 3px 0;
+  width: 100%;
+  text-align: justify;
+  text-transform:uppercase;
+}
+.forum-item-title-line-dark {  
+  color: rgb(51, 51, 51);
+  margin: 7px 0;
+  width: 100%;
+  text-align: justify;
+  text-transform:uppercase;
+}
+.forum-item-title-line-dark-hl {  
+  color: rgb(51, 51, 51);
+  background-color: lightgray; 
+  margin: 3px 0;
+  width: 100%;
+  text-align: justify;
+  text-transform:uppercase;
+}
+.forum-name {
+  padding-top: 2.5em;
+  margin-right: 1em;
+  text-align: right;
+}
+.forum-headshot {
+  margin-right: .5em;
+  height: 8em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+.forum-abstract {
+  text-align: left;
+  display: block;
+  color: #333;
+}
+.forum-bio {
+  clear: both;
+}
+.forum-image-credit, .forum-image-credit-light, .forum-image-credit a {
+  width: 25em;
+  color: #666;
+}
+.forum-image-credit a {
+  text-decoration: underline;
+}

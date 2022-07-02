@@ -56,8 +56,22 @@ declare function browse:show-hits($node as node(), $model as map(*), $collection
             {timeline:timeline($hits, 'Timeline', 'tei:teiHeader/tei:publicationStmt/tei:date')}
         </div>
     else
-        <div class="{if($browse:view = 'type' or $browse:view = 'date' or $browse:view = 'facets') then 'col-md-8 col-md-push-4' else 'col-md-12'}" xmlns="http://www.w3.org/1999/xhtml">
-           {( if(($browse:lang = 'syr') or ($browse:lang = 'ar')) then (attribute dir {"rtl"}) else(),
+        (if($browse:view = 'facets') then 
+            <div class="col-md-4">{
+                let $facet-config-file := 'facet-def.xml'
+                let $facet-config := 
+                    if($collection != '') then 
+                        concat($config:app-root, '/', string(config:collection-vars($collection)/@app-root),'/',$facet-config-file) 
+                    else concat($config:app-root,'/',$facet-config-file)
+                let $facet-config := 
+                    if(doc-available($facet-config)) then
+                            doc($facet-config)
+                        else ()
+                return sf:display($model("hits"), $facet-config) 
+            }</div>
+        else(),
+        <div class="{if($browse:view = 'type' or $browse:view = 'date' or $browse:view = 'facets') then 'col-md-8' else 'col-md-12'}" xmlns="http://www.w3.org/1999/xhtml">
+           {(if(($browse:lang = 'syr') or ($browse:lang = 'ar')) then (attribute dir {"rtl"}) else(),
                 <div class="float-container">
                     <div class="{if(($browse:lang = 'syr') or ($browse:lang = 'ar')) then "pull-left" else "pull-right paging"}">
                          {page:pages($hits, $collection, $browse:start, $browse:perpage,'', $sort-options)}
@@ -76,7 +90,7 @@ declare function browse:show-hits($node as node(), $model as map(*), $collection
                     {browse:display-hits($hits)}
                 </div>
             )}
-        </div>
+        </div>)
 };
 
 (:
