@@ -180,8 +180,8 @@ declare function data:search($collection as xs:string*, $queryString as xs:strin
                         else concat(data:build-collection-path($collection), data:create-query($collection),slider:date-filter(()))
     let $hits :=
             if(request:get-parameter-names() = '' or empty(request:get-parameter-names())) then 
-                collection($config:data-root || '/' || $collection)//tei:body[ft:query(., (),sf:facet-query())]
-            else util:eval($eval-string)//tei:body[ft:query(., (),sf:facet-query())]      
+                collection($config:data-root || '/' || $collection)//tei:body[ft:query(., (),sf:facet-query())] | collection($config:data-root || '/' || $collection)//tei:fileDesc[ft:query(., ())]
+            else util:eval($eval-string)//tei:body[ft:query(., (),sf:facet-query())] | util:eval($eval-string)//tei:fileDesc[ft:query(., ())]     
     let $sort := if($sort-element != '') then 
                     $sort-element
                  else if(request:get-parameter('sort-element', '') != '') then
